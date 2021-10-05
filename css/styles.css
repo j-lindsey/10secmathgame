@@ -1,11 +1,86 @@
-.equationType{
-    list-style:none;
-    display:flex;
+.score {
+    margin: 50px;
 }
 
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+/*Timer Styles*/
 
+.timer {
+    display: flex;
+    align-items: center;
+}
 
-.hidden{
-    display:none;
+.timer h3 {
+    margin-right: 15px;
+}
+
+.timer p {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/*Question Styles*/
+
+.currentquestion {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 10px;
+    margin: 10px;
+}
+
+.currentquestion p {
+    margin: 0px;
+}
+
+.input input {
+    text-align: center;
+    width: 150px;
+    height: 30px;
+}
+
+.equationType {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+.equationType li {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.range {
+    display: flex;
+    align-items: center;
+}
+
+.range input {
+    margin-left: 10px;
+    height: 20px;
+    width: 100px;
+}
+
+.reset {
+    display: flex;
+}
+
+.reset button {
+    margin-left: 15px;
+    padding: 2px 5px;
+    background-color: rgb(59, 59, 180);
+    color: white;
+}
+
+.reset button:hover {
+    background-color: rgb(59, 59, 180, 0.7);
+}
+
+.hidden {
+    display: none;
 }
