@@ -1,6 +1,7 @@
 let currentScore = 0;
 let highScore = 0;
 let equationTypes = ['+'];
+let range = 10;
 
 let getEquationOperators = function () {
     equationTypes = [];
@@ -12,8 +13,8 @@ let getEquationOperators = function () {
 
 let loadQuestion = function () {
     $('.currentquestion p').html("");
-    let firstNum = Math.floor(Math.random() * 10);
-    let secNum = Math.floor(Math.random() * 10);
+    let firstNum = Math.floor(Math.random() * range);
+    let secNum = Math.floor(Math.random() * range);
     let operator = equationTypes[Math.floor(Math.random() * equationTypes.length)];
     $('.currentquestion p').html(firstNum + operator + secNum);
     if (operator === '+') {
@@ -40,7 +41,7 @@ let startTimer = function () {
         timer = setInterval(function () {
             timepassed = Date.now() - startTime;
             timeleft = Math.round(10 - timepassed / 1000);
-            $('.timer p').html(timeleft);
+            $('.timer p').html(timeleft+' sec');
             console.log(timeleft);
             if (timeleft === 0) {
                 stopTimer();
@@ -62,7 +63,7 @@ var stopTimer = function () {
 
 $(document).ready(function () {
     let answer = loadQuestion();
-    $('.timer p').html(10);
+    $('.timer p').html(10 +' sec');
     $('.input input').on('keydown', function () {
         if (currentScore === 0) {
             startTimer();
@@ -92,5 +93,11 @@ $(document).ready(function () {
     $('.equationType :checkbox').change(function () {
         // this will contain a reference to the checkbox   
         getEquationOperators();
+    });
+
+    $('.range input').on('input', function () {
+        range = $(this).val();
+        $(this).val(range);
+        answer = loadQuestion();
     });
 })
