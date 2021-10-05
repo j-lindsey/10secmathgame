@@ -1,17 +1,34 @@
 let currentScore = 0;
 let highScore = 0;
+let equationTypes = ['+'];
+
+let getEquationOperators = function () {
+    equationTypes = [];
+    $('.equationType :checked').each(function () {
+        equationTypes.push($(this).val());
+    })
+}
 
 
 let loadQuestion = function () {
     $('.currentquestion p').html("");
     let firstNum = Math.floor(Math.random() * 10);
     let secNum = Math.floor(Math.random() * 10);
-    $('.currentquestion p').html(firstNum + ' + ' + secNum);
-    return firstNum + secNum;
+    let operator = equationTypes[Math.floor(Math.random() * equationTypes.length)];
+    $('.currentquestion p').html(firstNum + operator + secNum);
+    if (operator === '+') {
+        return firstNum + secNum;
+    } else if (operator === '-') {
+        return firstNum - secNum;
+    } else if (operator === 'x') {
+        return firstNum * secNum;
+    } else if (operator === '/') {
+        return firstNum / secNum;
+    }
 }
 
-let updateScore = function(){
-    $('.score').html('<p>Current Score: ' + currentScore+'</p><p>High Score: '+highScore+'</p>');
+let updateScore = function () {
+    $('.score').html('<p>Current Score: ' + currentScore + '</p><p>High Score: ' + highScore + '</p>');
 }
 
 let timepassed = 0;
@@ -25,7 +42,7 @@ let startTimer = function () {
             timeleft = Math.round(10 - timepassed / 1000);
             $('.timer p').html(timeleft);
             console.log(timeleft);
-            if(timeleft === 0){
+            if (timeleft === 0) {
                 stopTimer();
                 $('.input input').prop('disabled', true);
                 $('.reset').removeClass('hidden');
@@ -54,15 +71,15 @@ $(document).ready(function () {
         if (userAns === answer) {
             $(this).val('');
             currentScore++;
-            startTime+=1000;
+            startTime += 1000;
             answer = loadQuestion();
             updateScore();
         }
     })
 
-    $(document).on('click', '.reset button', function(){
+    $(document).on('click', '.reset button', function () {
         console.log(currentScore, highScore);
-        if(currentScore > highScore){
+        if (currentScore > highScore) {
             highScore = currentScore;
         }
         currentScore = 0;
@@ -71,4 +88,9 @@ $(document).ready(function () {
         $('.reset').addClass('hidden');
         answer = loadQuestion();
     })
+
+    $('.equationType :checkbox').change(function () {
+        // this will contain a reference to the checkbox   
+        getEquationOperators();
+    });
 })

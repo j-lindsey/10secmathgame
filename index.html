@@ -24,7 +24,22 @@
             <p></p>
         </div>
         <div class="input">
-            <input type="number" placeholder="answer" name="answer"/>
+            <input autocomplete="off" type="number" placeholder="answer" name="answer" />
+        </div>
+        <div>
+            <ul class="equationType">
+                <li><input type="checkbox" id="plus" name="plus" value="+" checked>
+                    <label for="plus">+</label>
+                </li>
+                <li><input type="checkbox" id="minus" name="minus" value="-">
+                    <label for="minus">-</label>
+                </li>
+                <li><input type="checkbox" id="multiply" name="multiply" value="x">
+                    <label for="multiply">x</label>
+                </li>
+                <li><input type="checkbox" id="divide" name="divide" value="/">
+                    <label for="divide">/</label>
+                </li>
         </div>
         <div class="reset hidden">
             <p>Would you like to play again?</p>
