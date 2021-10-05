@@ -87,6 +87,7 @@ $(document).ready(function () {
         updateScore();
         $('.input input').prop('disabled', false);
         $('.reset').addClass('hidden');
+        $('.input input').val('');
         answer = loadQuestion();
     })
 
