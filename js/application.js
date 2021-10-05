@@ -1,3 +1,6 @@
+let currentScore = 0;
+let highScore = 0;
+
 
 let loadQuestion = function () {
     $('.currentquestion p').html("");
@@ -7,6 +10,9 @@ let loadQuestion = function () {
     return firstNum + secNum;
 }
 
+let updateScore = function(){
+    $('.score').html('<p>Current Score: ' + currentScore+'</p><p>High Score: '+highScore+'</p>');
+}
 
 let timepassed = 0;
 let timer = null;
@@ -14,7 +20,6 @@ let startTime;
 let startTimer = function () {
     if (!timer) {
         startTime = Date.now() - timepassed;
-        console.log(startTime / 1000);
         timer = setInterval(function () {
             timepassed = Date.now() - startTime;
             timeleft = Math.round(10 - timepassed / 1000);
@@ -22,6 +27,8 @@ let startTimer = function () {
             console.log(timeleft);
             if(timeleft === 0){
                 stopTimer();
+                $('.input input').prop('disabled', true);
+                $('.reset').removeClass('hidden');
             }
         }, 50); // Executed every 20 millisecond
     }
@@ -29,6 +36,8 @@ let startTimer = function () {
 var stopTimer = function () {
     window.clearInterval(timer);
     timer = null;
+    timepassed = 0;
+    $('.timer p').html(10);
 };
 
 
@@ -36,7 +45,6 @@ var stopTimer = function () {
 
 $(document).ready(function () {
     let answer = loadQuestion();
-    let currentScore = 0;
     $('.timer p').html(10);
     $('.input input').on('keydown', function () {
         if (currentScore === 0) {
@@ -48,7 +56,19 @@ $(document).ready(function () {
             currentScore++;
             startTime+=1000;
             answer = loadQuestion();
+            updateScore();
         }
     })
 
+    $(document).on('click', '.reset button', function(){
+        console.log(currentScore, highScore);
+        if(currentScore > highScore){
+            highScore = currentScore;
+        }
+        currentScore = 0;
+        updateScore();
+        $('.input input').prop('disabled', false);
+        $('.reset').addClass('hidden');
+        answer = loadQuestion();
+    })
 })
