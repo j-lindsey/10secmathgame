@@ -8,10 +8,10 @@ let loadQuestion = function () {
 }
 
 
-var timepassed = 0;
-var timer = null;
-var startTime;
-var startTimer = function () {
+let timepassed = 0;
+let timer = null;
+let startTime;
+let startTimer = function () {
     if (!timer) {
         startTime = Date.now() - timepassed;
         console.log(startTime / 1000);
@@ -46,6 +46,7 @@ $(document).ready(function () {
         if (userAns === answer) {
             $(this).val('');
             currentScore++;
+            startTime+=1000;
             answer = loadQuestion();
         }
     })
