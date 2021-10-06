@@ -15,9 +15,7 @@ let loadQuestion = function () {
     $('.currentquestion p').html("");
     let firstNum = Math.floor(Math.random() * range);
     let secNum = Math.floor(Math.random() * range);
-    if(firstNum === 0 && secNum === 0){
-        secNum = Math.floor(Math.random() * range);
-    }
+
     let operator = equationTypes[Math.floor(Math.random() * equationTypes.length)];
     if (operator === '+') {
         $('.currentquestion p').html(firstNum + operator + secNum);
@@ -34,6 +32,12 @@ let loadQuestion = function () {
         $('.currentquestion p').html(firstNum + operator + secNum);
         return firstNum * secNum;
     } else if (operator === '/') {
+        if (firstNum === 0 || secNum === 0) {
+            do {
+                firstNum = Math.floor(Math.random() * range);
+                secNum = Math.floor(Math.random() * range);
+            } while (firstNum === 0 || secNum === 0);
+        }
         let answer = secNum;
         secNum = firstNum * secNum;
         $('.currentquestion p').html(secNum + operator + firstNum);
