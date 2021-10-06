@@ -31,7 +31,10 @@ let loadQuestion = function () {
         $('.currentquestion p').html(firstNum + operator + secNum);
         return firstNum * secNum;
     } else if (operator === '/') {
-        return firstNum / secNum;
+        let answer = secNum;
+        secNum = firstNum * secNum;
+        $('.currentquestion p').html(secNum + operator + firstNum);
+        return answer;
     }
 }
 
@@ -101,6 +104,7 @@ $(document).ready(function () {
     $('.equationType :checkbox').change(function () {
         // this will contain a reference to the checkbox   
         getEquationOperators();
+        answer = loadQuestion();
     });
 
     $('.range input').on('input', function () {
