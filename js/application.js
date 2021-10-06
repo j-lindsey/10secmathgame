@@ -15,6 +15,9 @@ let loadQuestion = function () {
     $('.currentquestion p').html("");
     let firstNum = Math.floor(Math.random() * range);
     let secNum = Math.floor(Math.random() * range);
+    if(firstNum === 0 && secNum === 0){
+        secNum = Math.floor(Math.random() * range);
+    }
     let operator = equationTypes[Math.floor(Math.random() * equationTypes.length)];
     if (operator === '+') {
         $('.currentquestion p').html(firstNum + operator + secNum);
