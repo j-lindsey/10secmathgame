@@ -16,12 +16,19 @@ let loadQuestion = function () {
     let firstNum = Math.floor(Math.random() * range);
     let secNum = Math.floor(Math.random() * range);
     let operator = equationTypes[Math.floor(Math.random() * equationTypes.length)];
-    $('.currentquestion p').html(firstNum + operator + secNum);
     if (operator === '+') {
+        $('.currentquestion p').html(firstNum + operator + secNum);
         return firstNum + secNum;
     } else if (operator === '-') {
-        return firstNum - secNum;
+        if (firstNum > secNum) {
+            $('.currentquestion p').html(firstNum + operator + secNum);
+            return firstNum - secNum;
+        } else {
+            $('.currentquestion p').html(secNum + operator + firstNum);
+            return secNum - firstNum;
+        }
     } else if (operator === 'x') {
+        $('.currentquestion p').html(firstNum + operator + secNum);
         return firstNum * secNum;
     } else if (operator === '/') {
         return firstNum / secNum;
@@ -41,7 +48,7 @@ let startTimer = function () {
         timer = setInterval(function () {
             timepassed = Date.now() - startTime;
             timeleft = Math.round(10 - timepassed / 1000);
-            $('.timer p').html(timeleft+' sec');
+            $('.timer p').html(timeleft + ' sec');
             console.log(timeleft);
             if (timeleft === 0) {
                 stopTimer();
@@ -63,7 +70,7 @@ var stopTimer = function () {
 
 $(document).ready(function () {
     let answer = loadQuestion();
-    $('.timer p').html(10 +' sec');
+    $('.timer p').html(10 + ' sec');
     $('.input input').on('keydown', function () {
         if (currentScore === 0) {
             startTimer();
